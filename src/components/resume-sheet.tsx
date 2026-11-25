@@ -56,12 +56,12 @@ export function ResumeSheet({ variant }: { variant: keyof typeof resumeVariants 
             <img
               src={photo}
               alt=""
-              className="block h-[200px] w-full rounded-[6px] border border-rule object-cover object-top"
+              className="block aspect-[3/4] w-full rounded-[6px] border border-rule object-cover object-top"
             />
           ) : (
             <div
               aria-hidden
-              className="flex h-[200px] w-full items-center justify-center rounded-[6px] border border-rule bg-bg text-[42px] font-semibold text-ink-3"
+              className="flex aspect-[3/4] w-full items-center justify-center rounded-[6px] border border-rule bg-bg text-[42px] font-semibold text-ink-3"
             >
               ณ
             </div>

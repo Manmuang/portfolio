@@ -63,7 +63,7 @@ export default function Home() {
             <img
               src={photo}
               alt={`รูปถ่ายของ${profile.name}`}
-              className="h-[220px] w-[176px] rounded-[6px] border border-rule object-cover object-top"
+              className="aspect-[3/4] w-[176px] rounded-[6px] border border-rule object-cover object-top"
             />
           ) : null}
         </section>
