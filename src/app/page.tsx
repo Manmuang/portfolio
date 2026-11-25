@@ -2,6 +2,7 @@ import Link from "next/link";
 import { experience, heroFacts, profile, projects, skills } from "@/content/data";
 import { photoSrc } from "@/content/photo";
 import { Chip, KindChip, Section, StatRow } from "@/components/blocks";
+import { Protect } from "@/components/protect";
 
 export default function Home() {
   const photo = photoSrc();
@@ -52,7 +53,9 @@ export default function Home() {
           <div>
             <p className="m-0 font-medium text-accent">{profile.role}</p>
             <h1 className="mb-5 mt-1 text-[2.5rem] font-semibold leading-tight md:text-[3.25rem]">{profile.name}</h1>
-            <p className="m-0 mb-8 max-w-[34em] text-[1.125rem] text-ink-2">{profile.summary}</p>
+            <p className="m-0 mb-8 max-w-[34em] text-pretty text-[1.125rem] text-ink-2">
+              <Protect>{profile.summary}</Protect>
+            </p>
             <StatRow stats={heroFacts} />
           </div>
           {photo ? (
@@ -84,8 +87,10 @@ export default function Home() {
               <dt className="mb-1 text-ink-3">ฝึกงาน</dt>
               <dd className="m-0">
                 <p className="m-0 font-semibold">{experience.company}</p>
-                <p className="m-0 text-ink-2">
-                  {experience.position} · {experience.period}
+                <p className="m-0 text-pretty text-ink-2">
+                  <span>{experience.position}</span>
+                  {"\u00A0· "}
+                  <span className="whitespace-nowrap">{experience.period}</span>
                 </p>
                 <p className="m-0 mt-1 text-[0.9375rem] text-ink-3">มีหนังสือรับรองการฝึกงาน ขอดูฉบับจริงได้</p>
               </dd>
@@ -102,7 +107,9 @@ export default function Home() {
                   <KindChip kind={p.kind} />
                 </div>
                 <h3 className="m-0 text-[1.25rem] font-semibold leading-snug">{p.title}</h3>
-                <p className="m-0 mt-1 text-ink-2">{p.summary}</p>
+                <p className="m-0 mt-1 text-pretty text-ink-2">
+                  <Protect>{p.summary}</Protect>
+                </p>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   {p.tags.map((t) => (
                     <Chip key={t}>{t}</Chip>
@@ -124,7 +131,9 @@ export default function Home() {
               <li key={p.id} className="rounded-[6px] border border-rule p-4">
                 <KindChip kind={p.kind} />
                 <h4 className="m-0 mt-2 text-[1rem] font-semibold leading-snug">{p.title}</h4>
-                <p className="m-0 mt-1 text-[0.9375rem] leading-snug text-ink-2">{p.summary}</p>
+                <p className="m-0 mt-1 text-pretty text-[0.9375rem] leading-snug text-ink-2">
+                  <Protect>{p.summary}</Protect>
+                </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
                     <Chip key={t}>{t}</Chip>
@@ -140,7 +149,9 @@ export default function Home() {
           <div className="space-y-5">
             {skills.map((s) => (
               <div key={s.group} className="grid gap-2 md:grid-cols-[12rem_1fr] md:gap-6">
-                <p className="m-0 font-medium">{s.group}</p>
+                <p className="m-0 text-pretty font-medium">
+                  <Protect>{s.group}</Protect>
+                </p>
                 {s.steps ? (
                   <ol className="m-0 list-none p-0">
                     {s.items.map((i, n) => (
@@ -158,8 +169,14 @@ export default function Home() {
                           {n + 1}
                         </span>
                         <span>
-                          <span className="block font-medium leading-7">{i}</span>
-                          {s.notes?.[n] ? <span className="block text-ink-2">{s.notes[n]}</span> : null}
+                          <span className="block text-pretty font-medium leading-7">
+                            <Protect>{i}</Protect>
+                          </span>
+                          {s.notes?.[n] ? (
+                            <span className="block text-pretty text-ink-2">
+                              <Protect>{s.notes[n]}</Protect>
+                            </span>
+                          ) : null}
                         </span>
                       </li>
                     ))}
@@ -174,7 +191,9 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="mb-0 mt-8 max-w-[40em] text-ink-2">{profile.about}</p>
+          <p className="mb-0 mt-8 max-w-[40em] text-pretty text-ink-2">
+            <Protect>{profile.about}</Protect>
+          </p>
         </Section>
 
         {/* ───── ติดต่อ ───── */}
@@ -182,19 +201,19 @@ export default function Home() {
           {contacts.length > 0 ? (
             <ul className="m-0 list-none space-y-2 p-0">
               {contacts.map(([label, value, href, external]) => (
-                <li key={label} className="grid grid-cols-[6rem_1fr] gap-2">
+                <li key={label} className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-2 sm:grid-cols-[6rem_minmax(0,1fr)]">
                   <span className="text-ink-3">{label}</span>
                   {href ? (
                     <a
                       href={href}
                       target={external ? "_blank" : undefined}
                       rel={external ? "noopener noreferrer" : undefined}
-                      className="underline decoration-rule underline-offset-4 hover:decoration-accent"
+                      className="break-all underline decoration-rule underline-offset-4 hover:decoration-accent sm:break-normal"
                     >
                       {value}
                     </a>
                   ) : (
-                    <span>{value}</span>
+                    <span className="break-words">{value}</span>
                   )}
                 </li>
               ))}

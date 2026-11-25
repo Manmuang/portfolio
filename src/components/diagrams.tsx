@@ -1,4 +1,5 @@
 import { orderStates, type Flow } from "@/content/data";
+import { Protect } from "@/components/protect";
 
 /* ───────── 1) ลำดับคำขอ WebDAV: ทำไม Ctrl+S ถึงกลับเข้าเว็บ ───────── */
 
@@ -103,8 +104,8 @@ export function DavSequence({ fit = false }: { fit?: boolean }) {
           ))}
         </svg>
       </div>
-      <figcaption className="mt-3 text-[0.9375rem] text-ink-3">
-        เส้นทางนี้ไม่มี cookie ยืนยันตัวด้วย token ใน URL ซึ่งผูกกับไฟล์เดียว ผู้ใช้เดียว และมีอายุ
+      <figcaption className="mt-3 text-pretty text-[0.9375rem] text-ink-3">
+        Excel ไม่ส่ง cookie มาด้วย ระบบจึงยืนยันตัวด้วย token ใน URL ที่ผูกกับไฟล์เดียว ผู้ใช้คนเดียว และกำหนดวันหมดอายุได้
       </figcaption>
     </figure>
   );
@@ -154,8 +155,8 @@ export function ReconcilePipeline() {
           ))}
         </ul>
       </div>
-      <figcaption className="mt-3 text-[0.9375rem] text-ink-3">
-        บิลได้สถานะที่แย่ที่สุดของรายการในบิล หลังจากนั้นกดแก้ไข แยก PDF เป็นไฟล์ละบิล และสั่งพิมพ์เป็นรอบแยกตามสาขา
+      <figcaption className="mt-3 text-pretty text-[0.9375rem] text-ink-3">
+        ระบบสรุปสถานะของบิลจากรายการที่มีปัญหาหนักสุด จากนั้นกดแก้ไฟล์ แยก PDF เป็นรายบิล และสั่งพิมพ์แยกตามสาขาได้
       </figcaption>
     </figure>
   );
@@ -222,8 +223,14 @@ export function FlowSteps({ flow }: { flow: Flow }) {
               {i + 1}
             </span>
             <span>
-              <span className="block font-semibold leading-snug">{s.title}</span>
-              {s.note ? <span className="block text-[0.9375rem] leading-snug text-ink-3">{s.note}</span> : null}
+              <span className="block text-pretty font-semibold leading-snug">
+                <Protect>{s.title}</Protect>
+              </span>
+              {s.note ? (
+                <span className="block text-pretty text-[0.9375rem] leading-snug text-ink-3">
+                  <Protect>{s.note}</Protect>
+                </span>
+              ) : null}
             </span>
           </li>
         ))}

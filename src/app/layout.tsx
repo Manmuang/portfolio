@@ -18,9 +18,9 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const title = "ณัฐพงษ์ ขวัญชัย — PHP / Full-stack Developer";
+const title = "ณัฐพงษ์ ขวัญชัย | PHP / Full-stack Developer";
 const description =
-  "พอร์ตโฟลิโอของณัฐพงษ์ ขวัญชัย: นักพัฒนาสาย PHP / Laravel และ Next.js ฝึกงาน 7 เดือนที่บริษัท บิ๊กสาระ จำกัด ทำระบบงานจริงและต้นแบบ 7 โปรเจกต์";
+  "พอร์ตโฟลิโอของณัฐพงษ์ ขวัญชัย นักพัฒนาเว็บสาย PHP, Laravel และ Next.js ฝึกงาน 7 เดือนที่บริษัท บิ๊กสาระ จำกัด พัฒนาระบบงานจริงและต้นแบบ 7 โปรเจกต์";
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : process.env.VERCEL_URL

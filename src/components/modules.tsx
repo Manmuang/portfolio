@@ -9,8 +9,10 @@ export function ModuleGroups({ groups }: { groups: ModuleGroup[] }) {
     <div className="space-y-10">
       {groups.map((g) => (
         <div key={g.heading}>
-          <h3 className="m-0 text-[1.125rem] font-semibold leading-snug">{g.heading}</h3>
-          {g.intro ? <p className="m-0 mt-1 text-ink-3">{g.intro}</p> : null}
+          {g.heading !== "ภายในระบบ" ? (
+            <h3 className="m-0 text-[1.125rem] font-semibold leading-snug">{g.heading}</h3>
+          ) : null}
+          {g.intro ? <p className="m-0 mt-1 text-pretty text-ink-3">{g.intro}</p> : null}
           <div className="mt-4 divide-y divide-rule rounded-[6px] border border-rule">
             {g.modules.map((m) => (
               <details key={m.name} className="group">

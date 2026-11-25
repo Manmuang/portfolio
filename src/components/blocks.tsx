@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Stat } from "@/content/data";
+import { Protect } from "@/components/protect";
 
 export function Chip({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "accent" }) {
   return (
@@ -38,14 +39,17 @@ export function Section({ id, title, children }: { id: string; title: string; ch
 }
 
 export function StatRow({ stats }: { stats: Stat[] }) {
+  const cols = stats.length <= 3 ? "sm:grid-cols-3" : "sm:grid-cols-4";
   return (
-    <dl className="m-0 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
+    <dl className={`m-0 grid grid-cols-2 gap-x-8 gap-y-5 ${cols}`}>
       {stats.map((s) => (
         <div key={s.label}>
           <dt className="sr-only">{s.label}</dt>
           <dd className="m-0">
             <span className="block text-[1.75rem] font-semibold leading-tight tabular-nums">{s.value}</span>
-            <span className="block text-[0.9375rem] leading-snug text-ink-3">{s.label}</span>
+            <span className="block text-pretty text-[0.9375rem] leading-snug text-ink-3">
+              <Protect>{s.label}</Protect>
+            </span>
           </dd>
         </div>
       ))}

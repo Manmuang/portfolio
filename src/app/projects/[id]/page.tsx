@@ -5,6 +5,7 @@ import { cases, flows, moduleGroups, projects, type CaseStudyId } from "@/conten
 import { Chip, KindChip, StatRow } from "@/components/blocks";
 import { DavSequence, FlowSteps, OrderStateChain, ReconcilePipeline } from "@/components/diagrams";
 import { ModuleGroups } from "@/components/modules";
+import { Protect } from "@/components/protect";
 
 export const dynamicParams = false;
 
@@ -16,7 +17,7 @@ export async function generateMetadata(props: PageProps<"/projects/[id]">): Prom
   const { id } = await props.params;
   const c = cases.find((x) => x.id === id);
   return c
-    ? { title: `${c.title} — ณัฐพงษ์ ขวัญชัย`, description: c.tagline }
+    ? { title: `${c.title} | ณัฐพงษ์ ขวัญชัย`, description: c.tagline }
     : { title: "ไม่พบโปรเจกต์" };
 }
 
@@ -75,36 +76,46 @@ export default async function ProjectPage(props: PageProps<"/projects/[id]">) {
 
       <main className="mx-auto max-w-[860px] px-5 pb-20 pt-12">
         <KindChip kind={meta.kind} />
-        <h1 className="mb-3 mt-4 text-[2rem] font-semibold leading-tight md:text-[2.5rem]">{c.title}</h1>
-        <p className="m-0 mb-8 max-w-[36em] text-[1.125rem] text-ink-2">{c.tagline}</p>
+        <h1 className="mb-3 mt-4 text-pretty text-[2rem] font-semibold leading-tight md:text-[2.5rem]">{c.title}</h1>
+        <p className="m-0 mb-8 max-w-[36em] text-pretty text-[1.125rem] text-ink-2">
+          <Protect>{c.tagline}</Protect>
+        </p>
         <StatRow stats={c.numbers} />
 
         <div className="mt-12 space-y-12">
           <section>
             <H>สิ่งที่ทำ</H>
-            <ul className="m-0 space-y-2 pl-5 text-ink-2">
+            <ul className="m-0 space-y-2 pl-5 text-pretty text-ink-2">
               {c.did.map((d) => (
-                <li key={d}>{d}</li>
+                <li key={d}>
+                  <Protect>{d}</Protect>
+                </li>
               ))}
             </ul>
           </section>
 
           <section>
             <H>โจทย์</H>
-            <p className="m-0 text-ink-2">{c.context}</p>
+            <p className="m-0 text-pretty text-ink-2">
+              <Protect>{c.context}</Protect>
+            </p>
           </section>
 
           {diagram ? <section className="rounded-[6px] border border-rule bg-bg-soft p-5 md:p-6">{diagram}</section> : null}
 
           <section>
-            <H>ส่วนที่ยากที่สุด</H>
+            <H>ปัญหาที่เจอและวิธีแก้</H>
             <ol className="m-0 list-none space-y-6 p-0">
               {c.hardest.map((h, i) => (
                 <li key={h.title} className="grid grid-cols-[2rem_1fr]">
                   <span className="font-semibold text-accent">{i + 1}</span>
                   <div>
-                    <p className="m-0 font-semibold">{h.title}</p>
-                    <p className="m-0 mt-1 text-ink-2">{h.body}</p>
+                    <p className="m-0 text-pretty font-semibold">
+                      <Protect>{h.title}</Protect>
+                    </p>
+                    <p className="m-0 mt-1 text-pretty text-ink-2">
+                      <Protect>{h.body}</Protect>
+                    </p>
                   </div>
                 </li>
               ))}
@@ -112,12 +123,16 @@ export default async function ProjectPage(props: PageProps<"/projects/[id]">) {
           </section>
 
           <section>
-            <H>เรื่องที่ตัดสินใจ</H>
+            <H>แนวคิดการออกแบบ</H>
             <dl className="m-0 space-y-5">
               {c.decisions.map((d) => (
                 <div key={d.title}>
-                  <dt className="font-semibold">{d.title}</dt>
-                  <dd className="m-0 mt-1 text-ink-2">{d.body}</dd>
+                  <dt className="text-pretty font-semibold">
+                    <Protect>{d.title}</Protect>
+                  </dt>
+                  <dd className="m-0 mt-1 text-pretty text-ink-2">
+                    <Protect>{d.body}</Protect>
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -133,18 +148,22 @@ export default async function ProjectPage(props: PageProps<"/projects/[id]">) {
 
           <section className="grid gap-10 md:grid-cols-2">
             <div>
-              <H>ตรวจงานยังไง</H>
-              <ul className="m-0 space-y-2 pl-5 text-ink-2">
+              <H>การทดสอบและตรวจสอบ</H>
+              <ul className="m-0 space-y-2 pl-5 text-pretty text-ink-2">
                 {c.verification.map((v) => (
-                  <li key={v}>{v}</li>
+                  <li key={v}>
+                    <Protect>{v}</Protect>
+                  </li>
                 ))}
               </ul>
             </div>
             <div>
-              <H>ที่ยังไม่ดี</H>
-              <ul className="m-0 space-y-2 pl-5 text-ink-2">
+              <H>ข้อจำกัดที่ยังเหลือ</H>
+              <ul className="m-0 space-y-2 pl-5 text-pretty text-ink-2">
                 {c.limits.map((v) => (
-                  <li key={v}>{v}</li>
+                  <li key={v}>
+                    <Protect>{v}</Protect>
+                  </li>
                 ))}
               </ul>
             </div>
