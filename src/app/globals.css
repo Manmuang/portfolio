@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/* โทเค็นสี: พื้นเรียบ เส้นบาง สีเน้นสีเดียว ตัวอักษรเข้มพอให้อ่านง่าย */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f5f6f8;
+  --ink: #12161c;
+  --ink-2: #333b46;
+  --ink-3: #566170;
+  --rule: #dde1e6;
+  --accent: #1e46c8;
+  --accent-soft: #e8eefc;
+  --brand: #1e46c8;
+  --ok: #17633a;
+  --warn: #8a5a00;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1216;
+  --bg-soft: #161a20;
+  --ink: #f1f3f6;
+  --ink-2: #cfd5de;
+  --ink-3: #9aa4b2;
+  --rule: #2a313a;
+  --accent: #9bb8ff;
+  --accent-soft: #19233d;
+  --brand: #9bb8ff;
+  --ok: #6fd09a;
+  --warn: #e0b04a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216;
+    --bg-soft: #161a20;
+    --ink: #f1f3f6;
+    --ink-2: #cfd5de;
+    --ink-3: #9aa4b2;
+    --rule: #2a313a;
+    --accent: #9bb8ff;
+    --accent-soft: #19233d;
+    --brand: #9bb8ff;
+    --ok: #6fd09a;
+    --warn: #e0b04a;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-brand: var(--brand);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --font-sans: var(--font-noto-thai), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ───────── เรซูเม่ A4 (/resume): กระดาษขนาดคงที่ พื้นขาวเสมอ ───────── */
+.paper-light {
+  --bg: #ffffff;
+  --bg-soft: #f3f5f8;
+  --ink: #12161c;
+  --ink-2: #2f3742;
+  --ink-3: #515c6b;
+  --rule: #d9dde3;
+  --accent: #1e46c8;
+  --accent-soft: #e8eefc;
+  --brand: #1e46c8;
+  background: #e9ebee;
+  color: var(--ink);
+}
+
+.a4 {
+  position: relative;
+  box-sizing: border-box;
+  width: 794px; /* 210mm ที่ 96dpi */
+  height: 1123px; /* 297mm ที่ 96dpi */
+  margin: 24px auto;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: 264px 1fr;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  html,
+  body,
+  .paper-light {
+    background: #fff !important;
+  }
+  .a4 {
+    margin: 0;
+  }
+}
+
+/* ───────── โทนสีตามบริษัทที่สมัคร (เลือกที่ src/content/theme.ts) ───────── */
+[data-accent="orange"] {
+  /* กระดาษทำการ: เทาอุ่นเอนไปทางกระดาษสมุดบัญชี ใช้เฉพาะชุดสีส้ม */
+  --bg: #fffdfa;
+  --bg-soft: #f8f4ee;
+  --ink: #1b1814;
+  --ink-2: #3b352e;
+  --ink-3: #5e564c;
+  --rule: #e5ddd2;
+  --accent: #c24100; /* ส้มเข้ม ใช้กับตัวหนังสือและปุ่ม คอนทราสต์บนพื้นขาวประมาณ 4.8:1 */
+  --accent-soft: #fff0e6;
+  --brand: #ff5c05; /* ส้มสดตามสีแบรนด์ ใช้เป็นเส้นตกแต่งเท่านั้น */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="orange"]:not([data-theme="light"]) {
+    --bg: #14110e;
+    --bg-soft: #1b1814;
+    --ink: #f4efe8;
+    --ink-2: #d6cec3;
+    --ink-3: #a49b8f;
+    --rule: #2f2a24;
+    --accent: #ff9a5f;
+    --accent-soft: #33200f;
+    --brand: #ff5c05;
+  }
+}

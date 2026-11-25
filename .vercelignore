@@ -1,0 +1,6 @@
+/private/
+/notes/
+/.next/
+/out/
+.DS_Store
+.env*
